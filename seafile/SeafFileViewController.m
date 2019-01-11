@@ -79,7 +79,7 @@ enum {
 @property (retain) NSDateFormatter *formatter;
 
 @property (nonatomic, strong) UISearchController *searchController;
-@property (nonatomic, strong) SeafSearchResultViewController *searchReslutController;
+@property (nonatomic, strong) SeafSearchResultViewController *searchResultController;
 
 @property (strong, retain) NSArray *photos;
 @property (strong, retain) NSArray *thumbs;
@@ -478,8 +478,8 @@ enum {
 
     _directory = directory;
     _connection = directory->connection;
-    self.searchReslutController.connection = _connection;
-    self.searchReslutController.directory = _directory;
+    self.searchResultController.connection = _connection;
+    self.searchResultController.directory = _directory;
     self.title = directory.name;
     // Do not ftch from remote server if cache exists.
     [_directory loadContent:false];
@@ -1834,17 +1834,17 @@ enum {
     return FALSE;
 }
 
-- (SeafSearchResultViewController *)searchReslutController {
-    if (!_searchReslutController) {
-        _searchReslutController = [[SeafSearchResultViewController alloc] init];
+- (SeafSearchResultViewController *)searchResultController {
+    if (!_searchResultController) {
+        _searchResultController = [[SeafSearchResultViewController alloc] init];
     }
-    return _searchReslutController;
+    return _searchResultController;
 }
 
 - (UISearchController *)searchController {
     if (!_searchController) {
-        _searchController = [[UISearchController alloc] initWithSearchResultsController:self.searchReslutController];
-        _searchController.searchResultsUpdater = self.searchReslutController;
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:self.searchResultController];
+        _searchController.searchResultsUpdater = self.searchResultController;
         _searchController.searchBar.barTintColor = [UIColor colorWithRed:240/255.0 green:239/255.0 blue:246/255.0 alpha:1.0];
         [_searchController.searchBar sizeToFit];
         
